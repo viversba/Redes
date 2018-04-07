@@ -25,6 +25,7 @@ public class UDPClient : MonoBehaviour {
 
 	void Start(){
 
+		DontDestroyOnLoad (gameObject);
 		active = false;
 		thread = new Thread(new ThreadStart(Transmit));
 		thread.Start();
@@ -74,15 +75,31 @@ public class UDPClient : MonoBehaviour {
 				accelerometer = new Vector3(float.Parse(datos[2]),float.Parse(datos[3]),float.Parse(datos[4]));
 				gyroscope = new Vector3(float.Parse(datos[6]),float.Parse(datos[7]),float.Parse(datos[8]));
 				magnetometer = new Vector3(float.Parse(datos[10]),float.Parse(datos[11]),float.Parse(datos[12]));
-				Debug.Log (accelerometer + " " + gyroscope + " " + magnetometer);
+				//Debug.Log (accelerometer + " " + gyroscope + " " + magnetometer);
 				returnData = "";
 			}
 		}
 	}
 
+	public Vector3 GetGyroscope(){
+
+		return gyroscope;
+	}
+
+	public Vector3 GetAccelerometer(){
+
+		return accelerometer;
+	}
+
+	public Vector3 GetMagnetometer(){
+
+		return magnetometer;
+	}
+
 	private void Transmit()
 	{
 		UDP = new UdpClient(5555);
+		Debug.Log ("Transmiter started");
 		while (true)
 		{
 			if (active) {
@@ -105,6 +122,5 @@ public class UDPClient : MonoBehaviour {
 				}
 			}
 		}
-		UDP.Close ();
 	}
 }
