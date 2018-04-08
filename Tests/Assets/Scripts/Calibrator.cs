@@ -34,6 +34,7 @@ public class Calibrator : MonoBehaviour {
 
 		for (int i=0;i<1000;i++) {
 			gyroSamples[i] = client.GetGyroscope ();
+			print (gyroSamples[i]);
 		}
 		print ("Gyroscope samples taken");
 		print (gyroSamples[999]);
@@ -43,6 +44,7 @@ public class Calibrator : MonoBehaviour {
 
 		for (int i=0;i<1000;i++) {
 			accelSamples[i] = client.GetAccelerometer ();
+			print (accelSamples[i]);
 		}
 		print ("Accelerometer samples taken");
 		print (accelSamples[999]);
@@ -52,6 +54,7 @@ public class Calibrator : MonoBehaviour {
 
 		for (int i=0;i<1000;i++) {
 			magnetSamples[i] = client.GetMagnetometer ();
+			print (magnetSamples[i]);
 		}
 		print ("Magnetometer samples taken");
 		print (magnetSamples[999]);
