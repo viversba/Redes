@@ -135,6 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 794c8b2fa0a7e4aa486f00cf5154a067, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  active: 1
 --- !u!4 &935730803
 Transform:
   m_ObjectHideFlags: 0
@@ -422,6 +423,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1952607215}
+  - component: {fileID: 1952607216}
   m_Layer: 0
   m_Name: Transmitter
   m_TagString: Untagged
@@ -442,6 +444,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1952607216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1952607214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26dbc6de7495d4a3e917e26676ec40ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2015042785
 GameObject:
   m_ObjectHideFlags: 0
@@ -454,6 +467,7 @@ GameObject:
   - component: {fileID: 2015042787}
   - component: {fileID: 2015042786}
   - component: {fileID: 2015042790}
+  - component: {fileID: 2015042791}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -536,6 +550,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c56982bed3624ded8f3b3a1b0dcaaa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2015042791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2015042785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39e58e5c2a29841c9ba082742b65ae16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  a: 0.9
+  aRoll: 0
+  aPitch: 0
+  magX: 0
+  magY: 0
+  time: 0
 --- !u!1 &2141926064
 GameObject:
   m_ObjectHideFlags: 0

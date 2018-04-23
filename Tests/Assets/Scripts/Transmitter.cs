@@ -38,13 +38,19 @@ public class Transmitter : MonoBehaviour {
 
 		gyroscope = magnetometer = accelerometer = Vector3.zero;
 		instance = new Transmitter ();
+		server = FindObjectOfType<UDPClient> ();
 	}
 
 	void Update(){
 
-		gyroscope = UDPClient.gyroscope;
-		accelerometer = UDPClient.accelerometer;
-		magnetometer = UDPClient.magnetometer;
+		if (server.IsActive ()) {
+			gyroscope = UDPClient.gyroscope;
+			accelerometer = UDPClient.accelerometer;
+			magnetometer = UDPClient.magnetometer;
+		} 
+		else {
+			gyroscope = accelerometer = magnetometer = Vector3.one;
+		}
 //		print (gyroscope + " " + accelerometer + " " + magnetometer);
 	}
 
