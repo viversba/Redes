@@ -52,19 +52,23 @@ public class IMU : MonoBehaviour {
 				Pitch = a * (angularVelocity.y * time + Pitch) + (1 - a) * aPitch * Mathf.Rad2Deg;
 			}
 
-			magX = ( m.z * Math.Sin(Roll) ) - ( m.y * Math.Cos(Roll) );
-			magY = ( m.x * Math.Cos (Pitch) ) + ( m.y*Math.Sin(Pitch) * Math.Sin(Roll) ) + ( m.z * Math.Sin(Pitch) * Math.Cos(Roll) );
+			magX = ( m.z * Math.Sin(Pitch) ) - ( m.y * Math.Cos(Pitch) );
+			magY = ( m.x * Math.Cos (Roll) ) + ( m.y*Math.Sin(Roll) * Math.Sin(Pitch) ) + ( m.z * Math.Sin(Roll) * Math.Cos(Pitch) );
 
-			Yaw = Mathf.Rad2Deg * (Math.Atan ( magX/magY ));
 
-			print (Roll + " " + Pitch + " " + Yaw);
+			Yaw = (Math.Atan ( magX/magY )) * Mathf.Rad2Deg;
+			print(Yaw);
+
+//			print (Roll.ToString("N4") + " " + Pitch.ToString("N4") + " " + Yaw.ToString("N4"));
+
+			transform.rotation = Quaternion.Euler(new Vector3((float) Pitch,(float) Yaw, (float) Roll));
 
 //			transform.Rotate (new Vector3((float)Roll,(float)Pitch,(float)Yaw));
 //			transform.rotation.eulerAngles = new Vector3 ((float)Roll, (float)Pitch, (float)Yaw);
 //			transition = Vector3.Lerp (transition,new Vector3((float)Roll,(float)Pitch,(float)Yaw),Time.deltaTime*1);
 //			transform.eulerAngles = new Vector3 ((float)Roll, (float)Pitch, (float)Yaw);
 //			transform.rotation = Quaternion.Euler (new Vector3((float)Roll,(float)Pitch,(float)Yaw));
-			print(Quaternion.Euler(new Vector3 ((float)Roll, (float)Pitch, (float)Yaw)));
+//			print(Quaternion.Euler(new Vector3 ((float)Roll, (float)Pitch, (float)Yaw)));
 		}
 		time = Time.time - t;
 	}
