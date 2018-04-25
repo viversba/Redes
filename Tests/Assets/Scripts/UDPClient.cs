@@ -77,7 +77,7 @@ public class UDPClient : MonoBehaviour {
 		Debug.Log ("Transmiter started");
 		while (true)
 		{
-			if (active) {
+			if (active && UDP.Available>0) {
 				
 //				semaphore.WaitOne ();
 				//print ("ACTIVE");

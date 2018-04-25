@@ -44,6 +44,7 @@ public class IMU : MonoBehaviour {
 //			print (aRoll + "  " + aPitch);
 
 			if (double.IsNaN(Roll) || double.IsNaN(Pitch)) {
+				//print ("NaN Valor inválido");
 				Roll = 1;
 				Pitch = 1;
 			} 
@@ -52,16 +53,18 @@ public class IMU : MonoBehaviour {
 				Pitch = a * (angularVelocity.y * time + Pitch) + (1 - a) * aPitch * Mathf.Rad2Deg;
 			}
 
-			magX = ( m.z * Math.Sin(Pitch) ) - ( m.y * Math.Cos(Pitch) );
-			magY = ( m.x * Math.Cos (Roll) ) + ( m.y*Math.Sin(Roll) * Math.Sin(Pitch) ) + ( m.z * Math.Sin(Roll) * Math.Cos(Pitch) );
+			magX = ( m.z * Math.Sin(Roll) ) - ( m.x * Math.Cos(Roll) );
+			magY = ( m.x * Math.Cos (Pitch) ) + ( m.y*Math.Sin(Pitch) * Math.Sin(Roll) ) + ( m.z * Math.Sin(Pitch) * Math.Cos(Roll) );
 
 
-			Yaw = (Math.Atan ( magX/magY )) * Mathf.Rad2Deg;
+//			Yaw = (Math.Atan ( magX/magY )) * Mathf.Rad2Deg;
+//			Yaw = 180 * Math.Atan (accel.z/Math.Sqrt(accel.x*accel.x + accel.z*accel.z))/Math.PI;
+			Yaw = Math.Atan(-Transmitter.magnetometer.y/Transmitter.magnetometer.x) * Mathf.Rad2Deg;
 			print(Yaw);
 
 //			print (Roll.ToString("N4") + " " + Pitch.ToString("N4") + " " + Yaw.ToString("N4"));
 
-			transform.rotation = Quaternion.Euler(new Vector3((float) Pitch,(float) Yaw, (float) Roll));
+			transform.rotation = Quaternion.Euler(new Vector3((float) Pitch,(float)Yaw, (float) Roll));
 
 //			transform.Rotate (new Vector3((float)Roll,(float)Pitch,(float)Yaw));
 //			transform.rotation.eulerAngles = new Vector3 ((float)Roll, (float)Pitch, (float)Yaw);
