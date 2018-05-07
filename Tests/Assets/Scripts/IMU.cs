@@ -13,10 +13,12 @@ public class IMU : MonoBehaviour {
 	public double aRoll, aPitch, magX, magY, time;
 	private UDPClient server;
 	private Vector3 eA;//SHORT FOR EULERANGLES, UT SINCE IT'S CALLED A LOT, MIGHT AS WELL ABREVIATE THE NAME
+	private AHRS ahrs;
 
 	// Use this for initialization
 	void Start () {
 
+		ahrs = new AHRS (0.001f);
 		server = FindObjectOfType<UDPClient> ();
 		angularVelocity = accel = Vector3.zero;
 		Yaw = Roll = Pitch = 1;
@@ -51,7 +53,9 @@ public class IMU : MonoBehaviour {
 
 	void Update () {
 
-		CalculateAngles ();
+//		print (AHRS.Quaternion[1] + " " + AHRS.Quaternion[2] + " " + AHRS.Quaternion[3] + " " + AHRS.Quaternion[0]);
+		transform.rotation = new Quaternion (AHRS.Quaternion[1],AHRS.Quaternion[2],AHRS.Quaternion[3],AHRS.Quaternion[0]);
+//		CalculateAngles ();
 //		print(Transmitter.magnetometer + "    " + Transmitter.accelerometer);
 	}
 
