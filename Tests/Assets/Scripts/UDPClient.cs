@@ -36,11 +36,6 @@ public class UDPClient : MonoBehaviour {
 		magnetometer = Vector3.zero;
 	}
 
-//	void Update(){
-//
-//		print (datos[4]);
-//	}
-
 	public void StartTransmition(){
 
 		if (!active) {

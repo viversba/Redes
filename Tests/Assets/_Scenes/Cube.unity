@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657934, g: 0.4964136, b: 0.5748189, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465934, g: 0.49642956, b: 0.5748249, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -77,15 +77,18 @@ LightmapSettings:
     m_PVRDirectSampleCount: 32
     m_PVRSampleCount: 500
     m_PVRBounces: 2
-    m_PVRFiltering: 0
+    m_PVRFilterTypeDirect: 0
+    m_PVRFilterTypeIndirect: 0
+    m_PVRFilterTypeAO: 0
     m_PVRFilteringMode: 1
     m_PVRCulling: 1
     m_PVRFilteringGaussRadiusDirect: 1
     m_PVRFilteringGaussRadiusIndirect: 5
     m_PVRFilteringGaussRadiusAO: 2
-    m_PVRFilteringAtrousColorSigma: 1
-    m_PVRFilteringAtrousNormalSigma: 1
-    m_PVRFilteringAtrousPositionSigma: 1
+    m_PVRFilteringAtrousPositionSigmaDirect: 0.5
+    m_PVRFilteringAtrousPositionSigmaIndirect: 2
+    m_PVRFilteringAtrousPositionSigmaAO: 1
+    m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -107,7 +110,15 @@ NavMeshSettings:
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
+    debug:
+      m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &919453860 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114121130040360688, guid: 9e2191b704b8945ddb9b03b45852805d,
+    type: 2}
+  m_PrefabInternal: {fileID: 1381533423}
+  m_Script: {fileID: 11500000, guid: c1b0c26efe89b4705be5b6f785fba563, type: 3}
 --- !u!1 &935730801
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,11 +231,11 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
-  m_StereoMirrorMode: 0
 --- !u!4 &1286948684
 Transform:
   m_ObjectHideFlags: 0
@@ -238,6 +249,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 10, y: 0, z: 0}
+--- !u!1001 &1381533423
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4629747803450110, guid: 9e2191b704b8945ddb9b03b45852805d, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 465.3432
+      objectReference: {fileID: 0}
+    - target: {fileID: 4629747803450110, guid: 9e2191b704b8945ddb9b03b45852805d, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 200.26744
+      objectReference: {fileID: 0}
+    - target: {fileID: 4629747803450110, guid: 9e2191b704b8945ddb9b03b45852805d, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4629747803450110, guid: 9e2191b704b8945ddb9b03b45852805d, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4629747803450110, guid: 9e2191b704b8945ddb9b03b45852805d, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4629747803450110, guid: 9e2191b704b8945ddb9b03b45852805d, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4629747803450110, guid: 9e2191b704b8945ddb9b03b45852805d, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4629747803450110, guid: 9e2191b704b8945ddb9b03b45852805d, type: 2}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 9e2191b704b8945ddb9b03b45852805d, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1450586143
 GameObject:
   m_ObjectHideFlags: 0
@@ -307,6 +360,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114666036042522952, guid: 6e7d897350a0a49c58644d0a4fb36fb1,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 224819205752423674, guid: 6e7d897350a0a49c58644d0a4fb36fb1,
         type: 2}
       propertyPath: m_LocalPosition.x
@@ -412,6 +470,36 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 935730802}
+    - target: {fileID: 114666036042522952, guid: 6e7d897350a0a49c58644d0a4fb36fb1,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114666036042522952, guid: 6e7d897350a0a49c58644d0a4fb36fb1,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114666036042522952, guid: 6e7d897350a0a49c58644d0a4fb36fb1,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 919453860}
+    - target: {fileID: 114666036042522952, guid: 6e7d897350a0a49c58644d0a4fb36fb1,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 114666036042522952, guid: 6e7d897350a0a49c58644d0a4fb36fb1,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114666036042522952, guid: 6e7d897350a0a49c58644d0a4fb36fb1,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: 00_Calibration
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6e7d897350a0a49c58644d0a4fb36fb1, type: 2}
   m_IsPrefabParent: 0
@@ -484,6 +572,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -499,6 +588,7 @@ MeshRenderer:
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -561,7 +651,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39e58e5c2a29841c9ba082742b65ae16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  a: 0.9
+  a: 0.8
   aRoll: 0
   aPitch: 0
   magX: 0

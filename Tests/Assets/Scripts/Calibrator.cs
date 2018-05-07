@@ -65,7 +65,8 @@ public class Calibrator : MonoBehaviour {
 		print ("GYRO CALIBRATION STARTED");
 		for (int i = 0; i < 1000; i++) {
 			gyroSamples [i] = Transmitter.gyroscope;
-			yield return new WaitForSeconds (0.005f);
+			yield return new WaitForSecondsRealtime(0.0001f);
+			print ("IMPERSO " + gyroSamples[i]);
 		}
 		Vector3 mean = Vector3.zero;
 		for(int i=0;i<1000;i++){
@@ -74,6 +75,7 @@ public class Calibrator : MonoBehaviour {
 		mean = mean / 1000;
 		print ("NOISE OF GYRO: " + mean);
 		StartCalibration(1);
+//		yield return new WaitForSecondsRealtime(0.0001f);
 	}
 
 	IEnumerator CalibrateAccelerometer(){
@@ -110,7 +112,7 @@ public class Calibrator : MonoBehaviour {
 				print ("TURN THE DEVICE 180 DEGREES ON CURRENT AXIS");
 			else
 				print ("TURN DEVICE 90 DEGREES TO NEXT AXIS");
-			yield return new WaitForSeconds (5f);
+			yield return new WaitForSeconds (2f);
 		}
 
 		//CALCULATIONS OF HARD IRON NOISE

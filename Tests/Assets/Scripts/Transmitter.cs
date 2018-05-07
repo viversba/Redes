@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading;
@@ -7,9 +7,12 @@ using System.IO;
 public class Transmitter : MonoBehaviour {
 
 	public static Vector3 accelerometer;
+	public static Vector3 Gaccel;
 	public static Vector3 gyroscope;
 	public static Vector3 magnetometer;
 
+	private float LSB = 131;//LEAST SIGNIFICATN BIT
+	private int range = 8;
 	private Thread client;
 	private UDPClient server;
 	private static object syncRoot = new Object();
@@ -47,6 +50,8 @@ public class Transmitter : MonoBehaviour {
 			gyroscope = UDPClient.gyroscope;
 			accelerometer = UDPClient.accelerometer;
 			magnetometer = UDPClient.magnetometer;
+
+			Gaccel = accelerometer*(range/LSB);
 		} 
 		else {
 			gyroscope = accelerometer = magnetometer = Vector3.one;

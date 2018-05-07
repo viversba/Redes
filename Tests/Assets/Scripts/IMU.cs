@@ -8,71 +8,62 @@ public class IMU : MonoBehaviour {
 	[Range(0,1)]
 	public float a;
 	public static Vector3 angularVelocity,accel;
-	public static double Roll, Pitch, Yaw;
+	public static double Yaw, Roll, Pitch;
 
-	private float LSB = 131;//LEAST SIGNIFICATN BIT
 	public double aRoll, aPitch, magX, magY, time;
 	private UDPClient server;
-	private static Vector3 transition;
+	private Vector3 eA;//SHORT FOR EULERANGLES, UT SINCE IT'S CALLED A LOT, MIGHT AS WELL ABREVIATE THE NAME
 
 	// Use this for initialization
 	void Start () {
 
 		server = FindObjectOfType<UDPClient> ();
-		transition  = angularVelocity = accel = Vector3.zero;
-		Roll = Pitch = Yaw = 1;
+		angularVelocity = accel = Vector3.zero;
+		Yaw = Roll = Pitch = 1;
 		aRoll = aPitch = 0;
 		magX = magY = 0;
 		time = 0;
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+	//Equations taken from: https://theccontinuum.com/2012/09/24/arduino-imu-pitch-roll-from-accelerometer/
+	Vector3 ComputeRotation(){
 
 		double t = Time.time;
 		if(server.IsActive()){
-
-			Vector3 m = Transmitter.magnetometer.normalized;
-			angularVelocity = Transmitter.gyroscope/131;
-			accel = Transmitter.accelerometer;
-
-
-			aRoll = Math.Atan2 (accel.x,accel.z);
-			aPitch = Math.Atan2 (accel.y,accel.z);
-//			aRoll = Math.Atan(accel.y/(Math.Sqrt(accel.x*accel.x + accel.z*accel.z)));
-//			aPitch = Math.Atan(-accel.x/(Math.Sqrt(accel.y*accel.y + accel.z*accel.z)));
-//			print (aRoll + "  " + aPitch);
-
-			if (double.IsNaN(Roll) || double.IsNaN(Pitch)) {
-				//print ("NaN Valor inválido");
+			
+			if (double.IsNaN(Yaw) || double.IsNaN(Roll)) {
+				Yaw = 1;
 				Roll = 1;
-				Pitch = 1;
 			} 
 			else {
-				Roll = a * (angularVelocity.x * time + Roll) + (1 - a) * aRoll * Mathf.Rad2Deg;
-				Pitch = a * (angularVelocity.y * time + Pitch) + (1 - a) * aPitch * Mathf.Rad2Deg;
+				Roll = Math.Atan (-Transmitter.Gaccel.x/Transmitter.Gaccel.z) * Mathf.Rad2Deg;
+				Yaw = Math.Atan (Transmitter.Gaccel.y/Math.Sqrt(Math.Pow(Transmitter.Gaccel.x,2) + Math.Pow(Transmitter.Gaccel.z,2))) * Mathf.Rad2Deg;
 			}
 
-			magX = ( m.z * Math.Sin(Roll) ) - ( m.x * Math.Cos(Roll) );
-			magY = ( m.x * Math.Cos (Pitch) ) + ( m.y*Math.Sin(Pitch) * Math.Sin(Roll) ) + ( m.z * Math.Sin(Pitch) * Math.Cos(Roll) );
-
-
-//			Yaw = (Math.Atan ( magX/magY )) * Mathf.Rad2Deg;
-//			Yaw = 180 * Math.Atan (accel.z/Math.Sqrt(accel.x*accel.x + accel.z*accel.z))/Math.PI;
-			Yaw = Math.Atan(-Transmitter.magnetometer.y/Transmitter.magnetometer.x) * Mathf.Rad2Deg;
-			print(Yaw);
-
-//			print (Roll.ToString("N4") + " " + Pitch.ToString("N4") + " " + Yaw.ToString("N4"));
-
-			transform.rotation = Quaternion.Euler(new Vector3((float) Pitch,(float)Yaw, (float) Roll));
-
-//			transform.Rotate (new Vector3((float)Roll,(float)Pitch,(float)Yaw));
-//			transform.rotation.eulerAngles = new Vector3 ((float)Roll, (float)Pitch, (float)Yaw);
-//			transition = Vector3.Lerp (transition,new Vector3((float)Roll,(float)Pitch,(float)Yaw),Time.deltaTime*1);
-//			transform.eulerAngles = new Vector3 ((float)Roll, (float)Pitch, (float)Yaw);
-//			transform.rotation = Quaternion.Euler (new Vector3((float)Roll,(float)Pitch,(float)Yaw));
-//			print(Quaternion.Euler(new Vector3 ((float)Roll, (float)Pitch, (float)Yaw)));
+			Pitch = Math.Atan(-Transmitter.magnetometer.y/Transmitter.magnetometer.x) * Mathf.Rad2Deg;
+			transform.rotation = Quaternion.Euler (new Vector3((float) Roll,(float)Pitch, (float) Yaw));
 		}
 		time = Time.time - t;
+
+		//DONT KNOW WHY, BUT  PITCH->X, YAW
+		return new Vector3((float) Roll,(float)Pitch, (float) Yaw);
+	}
+
+	void Update () {
+
+		CalculateAngles ();
+//		print(Transmitter.magnetometer + "    " + Transmitter.accelerometer);
+	}
+
+	void CalculateAngles(){
+
+		eA = ComputeRotation ();
+
+//		double w, x, y, z;
+//		w = Math.Cos (eA.y / 2) * Math.Cos(eA.z/2) * Math.Cos(eA.x/2) + Math.Sin(eA.y/2) * Math.Sin(eA.z/2) * Math.Sin(eA.x/2);
+//		x = Math.Sin (eA.y / 2) * Math.Cos(eA.z/2) * Math.Cos(eA.x/2) - Math.Cos(eA.y/2) * Math.Sin(eA.z/2) * Math.Sin(eA.x/2);
+//		y = Math.Cos (eA.y / 2) * Math.Sin(eA.z/2) * Math.Cos(eA.x/2) + Math.Sin(eA.y/2) * Math.Cos(eA.z/2) * Math.Sin(eA.x/2);
+//		z = Math.Cos (eA.y / 2) * Math.Cos(eA.z/2) * Math.Cos(eA.x/2) - Math.Sin(eA.y/2) * Math.Sin(eA.z/2) * Math.Cos(eA.x/2);
+//		transform.rotation = new Quaternion((float)x,(float)y,(float)z,(float)w);
 	}
 }
