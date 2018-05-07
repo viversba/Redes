@@ -1,0 +1,28 @@
+fileFormatVersion: 2
+guid: 5d3649247e12a4974bba216ed4d7c22d
+timeCreated: 1523123151
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Myriad Apple
+  fontNames:
+  - Myriad Apple
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 8a375f64edbe6454ab97bb7dfb270ff9, type: 3}
+  - {fileID: 12800000, guid: 6adab4872bf09489b91b991a3de0983f, type: 3}
+  - {fileID: 12800000, guid: ce7f83c86face48ab99e0230dd8e3069, type: 3}
+  - {fileID: 12800000, guid: 2dd3fb4c8fbf14a3a90d14bc81c53878, type: 3}
+  - {fileID: 12800000, guid: dfe66e6d488824c8484ae84ea611d521, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
