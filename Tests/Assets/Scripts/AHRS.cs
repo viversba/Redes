@@ -47,6 +47,11 @@ public class AHRS : MonoBehaviour {
 		Quaternion = new float[] { 1f, 0f, 0f, 0f };
 	}
 
+//	void Start(){
+//
+//		this (0.001f);
+//	}
+
 	/// <summary>
 	/// Algorithm AHRS update method. Requires only gyroscope and accelerometer data.
 	/// </summary>
@@ -97,7 +102,12 @@ public class AHRS : MonoBehaviour {
 		mx = Transmitter.magnetometer.y;
 		mz = Transmitter.magnetometer.y;
 
-		print (gx + " " + gy + " " + gz + " " + ax + " " + ay + " " + az + " " + mx + " " + my + " " + mz);
+		if (float.IsNaN (gx) || float.IsNaN (gy) || float.IsNaN (gz) || float.IsNaN (ax) || float.IsNaN (ay) || float.IsNaN (az) || float.IsNaN (mx) || float.IsNaN (my) || float.IsNaN (mz)) {
+
+			print ("NaN");
+		}
+
+//		print (gx + " " + gy + " " + gz + " " + ax + " " + ay + " " + az + " " + mx + " " + my + " " + mz);
 
 		float q1 = Quaternion[0], q2 = Quaternion[1], q3 = Quaternion[2], q4 = Quaternion[3];   // short name local variable for readability
 		float norm;
@@ -184,6 +194,8 @@ public class AHRS : MonoBehaviour {
 		Quaternion[1] = q2 * norm;
 		Quaternion[2] = q3 * norm;
 		Quaternion[3] = q4 * norm;
+
+//		print (Quaternion[0] + " " + Quaternion[1] + " " + Quaternion[2] + " " + Quaternion[3]);
 	}
 
 	/// <summary>

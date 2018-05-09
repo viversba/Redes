@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Calibrator : MonoBehaviour {
 
+	public GameObject nextButton;
 	public static Vector3 gyroNoise;
 	public static Vector3 accelNoise;
 	public static Vector3 magnetNoise;
@@ -49,6 +50,8 @@ public class Calibrator : MonoBehaviour {
 		case 2:
 			StartCoroutine (CalibrateMagnetometer());
 			break;	
+		case 3:
+			
 		default:
 			break;	
 		}
@@ -133,6 +136,12 @@ public class Calibrator : MonoBehaviour {
 		hardIron = new Vector3(noiseX,noiseY,noiseZ)/2;
 
 		//CALCULATIONS OF SOFT IRON NOISE
+		StartCalibration(3);
+	}
+
+	private void FinishCalibration(){
+
+		nextButton.SetActive (true);
 
 	}
 }
