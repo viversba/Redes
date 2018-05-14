@@ -136,7 +136,7 @@ PlayerSettings:
   vrSettings:
     cardboard:
       depthFormat: 0
-      enableTransitionView: 0
+      enableTransitionView: 1
     daydream:
       depthFormat: 0
       useSustainedPerformanceMode: 0
@@ -266,7 +266,7 @@ PlayerSettings:
     m_Devices:
     - cardboard
   - m_BuildTarget: Android
-    m_Enabled: 1
+    m_Enabled: 0
     m_Devices:
     - cardboard
   m_BuildTargetEnableVuforiaSettings: []
